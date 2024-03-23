@@ -14,15 +14,23 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { TLoginInput } from "../@types/auth";
+import { useAppDispatch } from "../redux/store";
+import { authLogin } from "../redux/reducers/authReducer";
+import { useNavigate } from "react-router-dom";
 
 export default function SignIn() {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
   } = useForm<TLoginInput>();
-  const onSubmit: SubmitHandler<TLoginInput> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<TLoginInput> = async (data: TLoginInput) => {
+    await dispatch(authLogin(data));
+    navigate("/");
+  };
 
   return (
     <Container component="main" maxWidth="xs">

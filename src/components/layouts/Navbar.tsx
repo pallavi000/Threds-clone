@@ -14,8 +14,10 @@ import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { Stack } from "@mui/material";
 import { Link } from "react-router-dom";
-
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+import { useSelector } from "react-redux";
+import { AppState, useAppDispatch } from "../../redux/store";
+import { fetchCurrentUser, logout } from "../../redux/reducers/authReducer";
+import { TUser } from "../../@types/auth";
 
 function Navbar() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
@@ -25,7 +27,13 @@ function Navbar() {
     null
   );
 
-  const [isLoggedIn, setIsLogged] = React.useState(false);
+  const dispatch = useAppDispatch();
+  const { token, user } = useSelector((state: AppState) => ({
+    token: state.auth.token,
+    user: state.auth.user,
+  }));
+
+  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -41,6 +49,12 @@ function Navbar() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+  React.useEffect(() => {
+    if (token) {
+      dispatch(fetchCurrentUser());
+      setIsLoggedIn(true);
+    }
+  }, [token]);
 
   return (
     <AppBar position="static">
@@ -126,11 +140,14 @@ function Navbar() {
               Home
             </Typography>
           </Box>
-          {isLoggedIn ? (
+          {isLoggedIn && user !== null ? (
             <Box sx={{ flexGrow: 0 }}>
-              <Tooltip title="Open settings">
+              <Tooltip title={user.firstName}>
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                  <Avatar
+                    alt={user.firstName}
+                    src="/static/images/avatar/2.jpg"
+                  />
                 </IconButton>
               </Tooltip>
               <Menu
@@ -149,11 +166,19 @@ function Navbar() {
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
               >
-                {settings.map((setting) => (
-                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center">{setting}</Typography>
-                  </MenuItem>
-                ))}
+                <MenuItem onClick={handleCloseUserMenu}>
+                  <Link to={"/"}>
+                    <Typography textAlign="center">Profile</Typography>
+                  </Link>
+                </MenuItem>
+                <MenuItem onClick={handleCloseUserMenu}>
+                  <Typography
+                    textAlign="center"
+                    onClick={() => dispatch(logout({}))}
+                  >
+                    Logout
+                  </Typography>
+                </MenuItem>
               </Menu>
             </Box>
           ) : (
