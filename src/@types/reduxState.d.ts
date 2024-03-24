@@ -20,3 +20,10 @@ export type TPostState = {
   isLoading: boolean;
   error: string | null;
 };
+
+export type TCommentState = {
+  comments: TComment[] | null;
+  isLoading: boolean;
+  error: string | null;
+  total: number;
+};
