@@ -1,5 +1,9 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { LoginApi, getCurrentUserApi } from "../../service/authService";
+import {
+  LoginApi,
+  getCurrentUserApi,
+  getUserByIdApi,
+} from "../../service/authService";
 import { TLoginInput, TUser } from "../../@types/auth";
 import { persistReducer } from "redux-persist";
 import { authPersistConfig } from "../../utils/persistConfig";

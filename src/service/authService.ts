@@ -8,3 +8,7 @@ export const LoginApi = async (data: TLoginInput) => {
 export const getCurrentUserApi = async () => {
   return await axiosInstance.get("/auth/me");
 };
+
+export const getUserByIdApi = async (id: number) => {
+  return await axiosInstance.get(`/users/${id}`);
+};

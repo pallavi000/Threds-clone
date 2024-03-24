@@ -51,6 +51,7 @@ function Navbar() {
   };
   React.useEffect(() => {
     if (token) {
+      console.log("hello user ");
       dispatch(fetchCurrentUser());
       setIsLoggedIn(true);
     }

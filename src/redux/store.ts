@@ -2,9 +2,11 @@ import { configureStore } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
 import authReducer from "./reducers/authReducer";
 import { persistStore } from "redux-persist";
+import postsReducer from "./reducers/postsReducer";
 
 const rootReducer = {
   auth: authReducer,
+  posts: postsReducer,
 };
 
 let store = configureStore({
