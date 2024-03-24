@@ -14,3 +14,9 @@ export type TPostsState = {
   error: string | null;
   total: number;
 };
+
+export type TPostState = {
+  post: TPost | null;
+  isLoading: boolean;
+  error: string | null;
+};
