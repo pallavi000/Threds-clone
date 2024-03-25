@@ -49,3 +49,5 @@ export const fetchCommentsByPostId = createAsyncThunk(
     }
   }
 );
+
+export default commentsSlice.reducer;

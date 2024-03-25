@@ -4,11 +4,13 @@ import authReducer from "./reducers/authReducer";
 import { persistStore } from "redux-persist";
 import postsReducer from "./reducers/postsReducer";
 import postReducer from "./reducers/postReducer";
+import commentsReducer from "./reducers/commentsReducer";
 
 const rootReducer = {
   auth: authReducer,
   posts: postsReducer,
   post: postReducer,
+  comments: commentsReducer,
 };
 
 let store = configureStore({

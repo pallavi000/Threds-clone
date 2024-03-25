@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { TPost } from "../@types/post";
 import Post from "../components/Home/Post";
 import { Container } from "@mui/material";
+import AddPost from "../components/post/AddPost";
 
 function Home() {
   const dispatch = useAppDispatch();
@@ -18,10 +19,16 @@ function Home() {
     dispatch(fetchAllPosts());
   }, []);
 
+  const handlePostSubmit = (content: string) => {
+    // Implement your post creation logic here (e.g., send to a server)
+    console.log("Post content:", content);
+  };
+
   isLoading && <div>App is Loading</div>;
 
   return (
     <Container maxWidth="md">
+      <AddPost />
       {posts?.map((post: TPost) => {
         return <Post post={post} />;
       })}

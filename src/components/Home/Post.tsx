@@ -22,7 +22,7 @@ function Post(props: PostProps) {
   }, []);
 
   return (
-    <Card sx={{ py: 2 }}>
+    <Box sx={{ py: 2, marginY: 2 }}>
       <Link to={`/post/${post.id}`}>
         <Stack direction={"row"} gap={8}>
           <Stack direction={"row"} gap={2}>
@@ -42,7 +42,7 @@ function Post(props: PostProps) {
           <Button variant="text">...</Button>
         </Stack>
       </Link>
-    </Card>
+    </Box>
   );
 }
 

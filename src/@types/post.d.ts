@@ -8,3 +8,10 @@ export type TPost = {
   userId: number;
   user?: TUser;
 };
+
+export type TPostInput = {
+  body: string;
+  tags: string[];
+  title: string;
+  userId: number;
+};

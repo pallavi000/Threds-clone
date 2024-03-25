@@ -140,7 +140,7 @@ function Navbar() {
               Home
             </Typography>
           </Box>
-          {isLoggedIn && user !== null ? (
+          {isLoggedIn && user ? (
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title={user.firstName}>
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
